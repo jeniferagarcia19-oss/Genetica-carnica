@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genética Cárnica — La ciencia detrás del asado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pasture-dark:#1F3626;
+    --pasture:#2F4A33;
+    --pasture-light:#4B6B4F;
+    --hay:#EFE7D2;
+    --hay-2:#E4D9BB;
+    --tag-gold:#C79A2E;
+    --tag-rust:#8C4A2B;
+    --cream:#FAF6EC;
+    --ink:#20241D;
+    --ink-soft:#4B5245;
+    --line:#c9bd9a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    margin:0;
+    color:var(--pasture-dark);
+  }
+  .mono{font-family:'Space Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,246,236,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;}
+  .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;letter-spacing:.02em;color:var(--pasture-dark);text-decoration:none;}
+  .brand span{color:var(--tag-rust);}
+  .navlinks{display:flex;gap:22px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;}
+  .navlinks a{text-decoration:none;color:var(--ink-soft);border-bottom:2px solid transparent;padding-bottom:4px;transition:.2s;}
+  .navlinks a:hover{color:var(--pasture-dark);border-color:var(--tag-gold);}
+  @media(max-width:640px){.navlinks{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 60px;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--tag-rust);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--tag-rust);display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.4rem,6.4vw,4.6rem);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    max-width:11ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--tag-rust);font-weight:500;}
+  .hero-sub{
+    max-width:520px;
+    font-size:1.08rem;
+    line-height:1.6;
+    color:var(--ink-soft);
+    margin-top:26px;
+  }
+  .horizon{
+    position:absolute;left:0;right:0;bottom:0;height:220px;
+    background:linear-gradient(180deg, transparent 0%, var(--pasture-dark) 100%);
+    opacity:0;
+  }
+  .hillsvg{width:100%;display:block;margin-top:60px;}
+
+  /* ---------- BIG STAT STRIP ---------- */
+  .statstrip{
+    background:var(--pasture-dark);
+    color:var(--hay);
+    padding:34px 0;
+  }
+  .statstrip .wrap{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;}
+  .stat{flex:1;min-width:140px;}
+  .stat .num{font-family:'Fraunces',serif;font-size:2.1rem;font-weight:600;color:var(--tag-gold);}
+  .stat .lbl{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:#cfd9cf;margin-top:4px;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .kicker{
+    font-family:'Space Mono',monospace;
+    font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;
+    color:var(--pasture-light);margin-bottom:10px;display:block;
+  }
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.12;}
+  .section-head p{color:var(--ink-soft);font-size:1.02rem;line-height:1.6;margin-top:16px;max-width:56ch;}
+
+  .divider{
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--line), transparent);
+    margin:0 auto;
+  }
+
+  /* ---------- WHAT IS IT: TWO CARDS ---------- */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media(max-width:720px){.duo{grid-template-columns:1fr;}}
+  .card{
+    background:var(--hay);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:30px 28px;
+    position:relative;
+  }
+  .card .tagmark{
+    font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.1em;
+    color:var(--tag-rust);text-transform:uppercase;margin-bottom:14px;display:inline-block;
+    border:1px solid var(--tag-rust);padding:3px 8px;border-radius:20px;
+  }
+  .card h3{font-size:1.3rem;margin-bottom:10px;}
+  .card p{color:var(--ink-soft);line-height:1.6;font-size:.98rem;}
+
+  /* ---------- TIMELINE (EAR TAGS) ---------- */
+  .timeline{
+    display:flex;
+    gap:0;
+    overflow-x:auto;
+    padding:20px 4px 30px;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+  }
+  .timeline::-webkit-scrollbar{height:6px;}
+  .timeline::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+  .tag{
+    flex:0 0 220px;
+    scroll-snap-align:start;
+    margin-right:18px;
+    position:relative;
+  }
+  .tag .clip{
+    width:22px;height:22px;border-radius:50%;
+    background:var(--pasture-dark);
+    margin:0 auto -1px;
+    position:relative;z-index:2;
+    border:3px solid var(--cream);
+  }
+  .tag .body{
+    background:var(--pasture-dark);
+    color:var(--hay);
+    border-radius:6px 6px 16px 16px;
+    padding:22px 18px 26px;
+    min-height:190px;
+  }
+  .tag .yr{font-family:'Space Mono',monospace;font-size:.82rem;color:var(--tag-gold);letter-spacing:.05em;}
+  .tag h4{font-family:'Fraunces',serif;font-size:1.08rem;margin:8px 0 8px;color:#fff;font-weight:600;}
+  .tag p{font-size:.86rem;line-height:1.5;color:#cfd9cf;}
+
+  /* ---------- G vs P SCALE ---------- */
+  .balance-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  @media(max-width:780px){.balance-wrap{grid-template-columns:1fr;}}
+  .scenario{
+    border-left:3px solid var(--tag-gold);
+    padding:6px 0 6px 20px;
+    margin-bottom:26px;
+  }
+  .scenario h4{font-family:'Fraunces',serif;font-size:1.1rem;color:var(--pasture-dark);margin-bottom:6px;}
+  .scenario p{color:var(--ink-soft);font-size:.95rem;line-height:1.55;}
+  .equation{
+    background:var(--pasture-dark);
+    border-radius:4px;
+    padding:40px 30px;
+    text-align:center;
+    color:var(--hay);
+  }
+  .equation .eq{font-family:'Space Mono',monospace;font-size:clamp(1.1rem,2.6vw,1.5rem);color:var(--tag-gold);letter-spacing:.02em;}
+  .equation .capt{margin-top:16px;font-size:.86rem;color:#cfd9cf;line-height:1.6;}
+
+  /* ---------- DATA TABLE ---------- */
+  .datagrid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:10px;
+  }
+  @media(max-width:680px){.datagrid{grid-template-columns:1fr;}}
+  .dcell{background:var(--hay);padding:22px 20px;}
+  .dcell .num{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--tag-rust);font-weight:600;}
+  .dcell .lbl{font-size:.82rem;color:var(--ink-soft);margin-top:6px;text-transform:uppercase;letter-spacing:.04em;}
+
+  /* ---------- COMPARISON BARS ---------- */
+  .compare{margin-top:10px;}
+  .crow{display:grid;grid-template-columns:140px 1fr;gap:16px;align-items:center;margin-bottom:22px;}
+  @media(max-width:600px){.crow{grid-template-columns:1fr;}}
+  .clabel{font-size:.88rem;color:var(--ink-soft);font-weight:600;}
+  .bars{display:flex;flex-direction:column;gap:6px;}
+  .barline{display:flex;align-items:center;gap:10px;}
+  .barline .name{width:110px;font-size:.76rem;font-family:'Space Mono',monospace;color:var(--ink-soft);flex-shrink:0;}
+  .barline .track{flex:1;background:var(--hay-2);border-radius:20px;height:10px;overflow:hidden;}
+  .barline .fill{height:100%;border-radius:20px;background:var(--pasture);}
+  .barline.export .fill{background:var(--tag-rust);}
+  .barline .val{font-family:'Space Mono',monospace;font-size:.76rem;width:52px;text-align:right;color:var(--ink);}
+
+  .note{
+    background:var(--hay);border:1px dashed var(--tag-gold);
+    padding:18px 20px;border-radius:4px;font-size:.9rem;color:var(--ink-soft);line-height:1.6;margin-top:24px;
+  }
+  .note strong{color:var(--pasture-dark);}
+
+  /* ---------- BREEDS ---------- */
+  .breeds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media(max-width:820px){.breeds{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:520px){.breeds{grid-template-columns:1fr;}}
+  .breed{
+    background:var(--cream);border:1px solid var(--line);padding:20px 18px;border-radius:2px;
+  }
+  .breed .origin{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--pasture-light);text-transform:uppercase;letter-spacing:.05em;}
+  .breed h4{font-family:'Fraunces',serif;font-size:1.12rem;margin:8px 0 8px;color:var(--pasture-dark);}
+  .breed p{font-size:.86rem;color:var(--ink-soft);line-height:1.5;}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    background:var(--pasture-dark);color:var(--hay);text-align:center;
+    padding:100px 0;
+  }
+  .closing h2{color:#fff;font-size:clamp(1.8rem,4vw,2.7rem);max-width:16ch;margin:0 auto;line-height:1.15;}
+  .closing p{color:#cfd9cf;max-width:52ch;margin:22px auto 0;line-height:1.6;}
+  .closing .src{margin-top:40px;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--tag-gold);}
+
+  footer{padding:34px 0;text-align:center;font-size:.8rem;color:var(--ink-soft);}
+  footer .wrap{border-top:1px solid var(--line);padding-top:24px;}
+
+  [data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease;}
+  [data-reveal].in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Genética<span>Cárnica</span></a>
+    <div class="navlinks">
+      <a href="#historia">Historia</a>
+      <a href="#modelo">El modelo G×P</a>
+      <a href="#datos">Los números</a>
+      <a href="#razas">Razas</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Divulgación · ISETA 2026</span>
+    <h1>La genética que decide qué carne <em>llega a tu mesa</em></h1>
+    <p class="hero-sub">Por qué un ternero de la Pampa Húmeda puede terminar en una parrilla de Buenos Aires, en una góndola de Beijing o en una mesa alemana — y qué tiene que ver la genética en esa decisión.</p>
+  </div>
+  <svg class="hillsvg" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,120 C200,60 350,140 550,90 C750,40 900,120 1200,70 L1200,160 L0,160 Z" fill="#4B6B4F" opacity="0.35"/>
+    <path d="M0,140 C250,100 420,150 620,110 C820,70 1000,140 1200,110 L1200,160 L0,160 Z" fill="#2F4A33"/>
+  </svg>
+</header>
+
+<div class="statstrip">
+  <div class="wrap">
+    <div class="stat"><div class="num">235,4 kg</div><div class="lbl">peso promedio por animal, récord 2026</div></div>
+    <div class="stat"><div class="num">US$ 1.653,7 M</div><div class="lbl">exportado ene–abr 2026</div></div>
+    <div class="stat"><div class="num">62 %</div><div class="lbl">rendimiento buscado para exportación</div></div>
+    <div class="stat"><div class="num">300+ años</div><div class="lbl">de selección genética bovina</div></div>
+  </div>
+</div>
+
+<section id="que-es">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="kicker">Para empezar</span>
+      <h2>¿Qué es, en criollo, la "genética cárnica"?</h2>
+      <p>Es la ciencia que estudia qué características hereda un animal de sus padres — y cómo elegirlas para producir más y mejor carne. No es magia ni es solo una raza "linda": es información que se puede medir, comparar y mejorar generación tras generación.</p>
+    </div>
+    <div class="duo">
+      <div class="card" data-reveal>
+        <span class="tagmark">Lo que el animal trae</span>
+        <h3>Potencial genético (G)</h3>
+        <p>Es la capacidad que un animal <em>porta</em> en sus genes: cuánto puede crecer, qué tan rápido, qué tan buena carne puede dar. La trae de fábrica, pero no siempre la puede mostrar.</p>
+      </div>
+      <div class="card" data-reveal>
+        <span class="tagmark">Lo que el campo permite</span>
+        <h3>Potencial del sistema (P)</h3>
+        <p>Es el techo que pone el ambiente: cuánto pasto hay, cómo es el clima, qué sanidad recibe. Un animal con genética excelente en un campo pobre no va a rendir lo que promete.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<section id="historia">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="kicker">300 años en 6 paradas</span>
+      <h2>De mirar el animal a leer su ADN</h2>
+      <p>La forma de elegir reproductores cambió por completo: antes se elegía "a ojo", hoy se elige con datos y hasta con genoma completo. Deslizá para recorrer la línea de tiempo.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="timeline" data-reveal>
+      <div class="tag"><div class="clip"></div><div class="body">
+        <div class="yr">S. XVIII–XIX</div>
+        <h4>A puro ojo</h4>
+        <p>Se elegían los animales por su forma y tamaño. Nace Hereford, Angus, Shorthorn.</p>
+      </div></div>
+      <div class="tag"><div class="clip"></div><div class="body">
+        <div class="yr">1900–1950</div>
+        <h4>Empiezan los registros</h4>
+        <p>Llegan razas europeas a Argentina. Se empieza a anotar quién es hijo de quién.</p>
+      </div></div>
+      <div class="tag"><div class="clip"></div><div class="body">
+        <div class="yr">1950–1980</div>
+        <h4>Aparecen los números</h4>
+        <p>Se mide el rendimiento de las crías de cada toro (DEP). La elección deja de ser solo visual.</p>
+      </div></div>
+      <div class="tag"><div class="clip"></div><div class="body">
+        <div class="yr">1980–2000</div>
+        <h4>Se cruzan razas</h4>
+        <p>Cruzas entre razas europeas e indias dan animales más fuertes y adaptados al calor.</p>
+      </div></div>
+      <div class="tag"><div class="clip"></div><div class="body">
+        <div class="yr">2000–2015</div>
+        <h4>Llega la genómica</h4>
+        <p>Se puede leer parte del ADN del animal y predecir su rendimiento antes de que crezca.</p>
+      </div></div>
+      <div class="tag"><div class="clip"></div><div class="body">
+        <div class="yr">2015–hoy</div>
+        <h4>Edición génica</h4>
+        <p>Tecnologías como CRISPR abren la puerta a corregir genes puntuales. Todavía en debate.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<section id="modelo">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="kicker">La idea más importante del trabajo</span>
+      <h2>Buena genética + mal campo = plata perdida</h2>
+      <p>La genética nunca actúa sola. Lo que un rodeo realmente produce depende de cómo se combinan la genética y el sistema en el que vive.</p>
+    </div>
+    <div class="balance-wrap">
+      <div data-reveal>
+        <div class="scenario">
+          <h4>Genética por debajo del campo</h4>
+          <p>El campo podría dar más, pero los animales no tienen la genética para aprovecharlo. Acá conviene mejorar la genética.</p>
+        </div>
+        <div class="scenario">
+          <h4>Genética por encima del campo</h4>
+          <p>Los animales podrían rendir más, pero el campo no tiene pasto ni manejo suficiente. Cambiar de raza no soluciona nada: hay que mejorar el sistema.</p>
+        </div>
+        <div class="scenario">
+          <h4>Los dos con margen de sobra</h4>
+          <p>Ni la genética ni el campo están al tope. Con mejor manejo del día a día ya se gana bastante, sin gastar en nada nuevo.</p>
+        </div>
+      </div>
+      <div class="equation" data-reveal>
+        <div class="eq">Producción real = f ( G , P , Manejo )</div>
+        <div class="capt">La cría de un buen rodeo es una ecuación con tres variables, no una sola. Ignorar una de las tres es, literalmente, dejar plata en el campo.</div>
+      </div>
+    </div>
+    <div class="note" data-reveal><strong>Dato real:</strong> en la Cuenca del Salado, elegir vacas más grandes sin ajustar el campo generó pérdidas estimadas en $75.446.000 anuales — porque una vaca más grande come más pero no siempre desteta un ternero proporcionalmente más pesado.</div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<section id="datos">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="kicker">Con números, mejor</span>
+      <h2>Lo que muestra el campo real</h2>
+      <p>Datos de la Unidad Demostrativa R6 de INTA EEA Balcarce, un sistema de cría bien ajustado en la Pampa Húmeda.</p>
+    </div>
+    <div class="datagrid" data-reveal>
+      <div class="dcell"><div class="num">1,7–1,9</div><div class="lbl">vacas equivalentes por hectárea</div></div>
+      <div class="dcell"><div class="num">82–87 %</div><div class="lbl">terneros logrados por vaca entorada</div></div>
+      <div class="dcell"><div class="num">263–290 kg</div><div class="lbl">de ternero producido por hectárea al año</div></div>
+    </div>
+
+    <div class="section-head" style="margin-top:60px;" data-reveal>
+      <span class="kicker">Interno vs. exportación</span>
+      <h2>No se cría igual para el asado que para el barco</h2>
+      <p>Estos son valores de referencia, no reglas fijas: cambian según el destino y el tipo de producto. Pero marcan una tendencia clara.</p>
+    </div>
+    <div class="compare" data-reveal>
+      <div class="crow">
+        <div class="clabel">Peso de faena</div>
+        <div class="bars">
+          <div class="barline"><span class="name">Interno</span><div class="track"><div class="fill" style="width:69%"></div></div><span class="val">390 kg</span></div>
+          <div class="barline export"><span class="name">Exportación</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">550 kg</span></div>
+        </div>
+      </div>
+      <div class="crow">
+        <div class="clabel">Rendimiento</div>
+        <div class="bars">
+          <div class="barline"><span class="name">Interno</span><div class="track"><div class="fill" style="width:93%"></div></div><span class="val">58-59%</span></div>
+          <div class="barline export"><span class="name">Exportación</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="val">60%+</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" data-reveal><strong>2026, en tiempo real:</strong> entre enero y abril se exportaron US$ 1.653,7 millones — récord histórico para el período — pese a la faena más baja en diez años. El campo argentino respondió mandando animales más pesados y de mejor rendimiento, no más cantidad. (BCR, 2026)</div>
+  </div>
+</section>
+
+<div class="wrap"><div class="divider"></div></div>
+
+<section id="razas">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="kicker">Quién es quién</span>
+      <h2>Razas que se ven en el campo argentino</h2>
+      <p>Ninguna raza es "la mejor": la mejor es la que se adapta al clima, al pasto y al mercado al que apunta el productor.</p>
+    </div>
+    <div class="breeds" data-reveal>
+      <div class="breed"><span class="origin">Escocia</span><h4>Aberdeen Angus</h4><p>Excelente calidad de carne y partos fáciles. La más elegida en Argentina.</p></div>
+      <div class="breed"><span class="origin">Inglaterra</span><h4>Hereford</h4><p>Muy rústica, se banca bien el pastoreo extensivo de la Pampa Húmeda.</p></div>
+      <div class="breed"><span class="origin">India</span><h4>Brahman</h4><p>Raza pura, aguanta el calor y los parásitos como pocas.</p></div>
+      <div class="breed"><span class="origin">EE. UU. · cruza</span><h4>Brangus</h4><p>Mezcla de Brahman y Angus: lo mejor de las dos para el norte argentino.</p></div>
+      <div class="breed"><span class="origin">Suiza</span><h4>Simmental</h4><p>Crece rápido y llega a buen peso, ideal para exportación.</p></div>
+      <div class="breed"><span class="origin">Francia</span><h4>Limousin</h4><p>Muy magra y con excelente rendimiento, buscada en Europa y Asia.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="closing">
+  <div class="wrap">
+    <h2>La genética no es magia: es una decisión</h2>
+    <p>Elegir bien no es elegir "la raza más grande" o "la más de moda": es elegir la genética que ese campo, con ese clima y para ese mercado, puede realmente sostener.</p>
+    <div class="src">Basado en el TP "Genética Cárnica" — Metodología de la Investigación, ISETA 2026</div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Jenifer García &amp; Marina Carrizo · ISETA — Tecnicatura Superior en Producción Agrícola Ganadera · 2026
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
