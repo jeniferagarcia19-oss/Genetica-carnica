@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                   <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -235,6 +235,17 @@
   .breed .origin{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--pasture-light);text-transform:uppercase;letter-spacing:.05em;}
   .breed h4{font-family:'Fraunces',serif;font-size:1.12rem;margin:8px 0 8px;color:var(--pasture-dark);}
   .breed p{font-size:.86rem;color:var(--ink-soft);line-height:1.5;}
+  .breed{cursor:pointer;transition:border-color .2s;}
+  .breed:hover{border-color:var(--pasture-light);}
+  .breed .flag{font-size:1.3rem;margin-right:6px;vertical-align:middle;}
+  .breed-photo{
+    max-height:0;overflow:hidden;opacity:0;
+    transition:max-height .35s ease,opacity .35s ease,margin .35s ease;
+    margin-top:0;border-radius:2px;
+  }
+  .breed-photo img{width:100%;display:block;border-radius:2px;}
+  .breed.open .breed-photo{max-height:220px;opacity:1;margin-top:14px;}
+  .breed-caption{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--ink-soft);margin-top:6px;}
 
   /* ---------- CLOSING ---------- */
   .closing{
@@ -443,12 +454,30 @@
       <p>Ninguna raza es "la mejor": la mejor es la que se adapta al clima, al pasto y al mercado al que apunta el productor.</p>
     </div>
     <div class="breeds" data-reveal>
-      <div class="breed"><span class="origin">Escocia</span><h4>Aberdeen Angus</h4><p>Excelente calidad de carne y partos fáciles. La más elegida en Argentina.</p></div>
-      <div class="breed"><span class="origin">Inglaterra</span><h4>Hereford</h4><p>Muy rústica, se banca bien el pastoreo extensivo de la Pampa Húmeda.</p></div>
-      <div class="breed"><span class="origin">India</span><h4>Brahman</h4><p>Raza pura, aguanta el calor y los parásitos como pocas.</p></div>
-      <div class="breed"><span class="origin">EE. UU. · cruza</span><h4>Brangus</h4><p>Mezcla de Brahman y Angus: lo mejor de las dos para el norte argentino.</p></div>
-      <div class="breed"><span class="origin">Suiza</span><h4>Simmental</h4><p>Crece rápido y llega a buen peso, ideal para exportación.</p></div>
-      <div class="breed"><span class="origin">Francia</span><h4>Limousin</h4><p>Muy magra y con excelente rendimiento, buscada en Europa y Asia.</p></div>
+      <div class="breed" onclick="this.classList.toggle('open')">
+        <span class="origin"><span class="flag">🏴</span>Escocia</span><h4>Aberdeen Angus</h4><p>Excelente calidad de carne y partos fáciles. La más elegida en Argentina.</p>
+        <div class="breed-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Angus%20cow%20in%20Glen%20Lonan%20-%20geograph.org.uk%20-%20300856.jpg" alt="Aberdeen Angus" loading="lazy"><div class="breed-caption">Foto: Wikimedia Commons</div></div>
+      </div>
+      <div class="breed" onclick="this.classList.toggle('open')">
+        <span class="origin"><span class="flag">🇬🇧</span>Inglaterra</span><h4>Hereford</h4><p>Muy rústica, se banca bien el pastoreo extensivo de la Pampa Húmeda.</p>
+        <div class="breed-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hereford_bull_large.jpg" alt="Hereford" loading="lazy"><div class="breed-caption">Foto: Wikimedia Commons</div></div>
+      </div>
+      <div class="breed" onclick="this.classList.toggle('open')">
+        <span class="origin"><span class="flag">🇮🇳</span>India</span><h4>Brahman</h4><p>Raza pura, aguanta el calor y los parásitos como pocas.</p>
+        <div class="breed-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/CSIRO%20ScienceImage%2011129%20Brahman%20cattle.jpg" alt="Brahman" loading="lazy"><div class="breed-caption">Foto: Wikimedia Commons</div></div>
+      </div>
+      <div class="breed" onclick="this.classList.toggle('open')">
+        <span class="origin"><span class="flag">🇺🇸</span>EE. UU. · cruza</span><h4>Brangus</h4><p>Mezcla de Brahman y Angus: lo mejor de las dos para el norte argentino.</p>
+        <div class="breed-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Aus_Brangus.JPG" alt="Brangus" loading="lazy"><div class="breed-caption">Foto: Wikimedia Commons</div></div>
+      </div>
+      <div class="breed" onclick="this.classList.toggle('open')">
+        <span class="origin"><span class="flag">🇨🇭</span>Suiza</span><h4>Simmental</h4><p>Crece rápido y llega a buen peso, ideal para exportación.</p>
+        <div class="breed-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bos_taurus_taurus_looking.jpg" alt="Simmental" loading="lazy"><div class="breed-caption">Foto: Wikimedia Commons</div></div>
+      </div>
+      <div class="breed" onclick="this.classList.toggle('open')">
+        <span class="origin"><span class="flag">🇫🇷</span>Francia</span><h4>Limousin</h4><p>Muy magra y con excelente rendimiento, buscada en Europa y Asia.</p>
+        <div class="breed-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Limousinedeface.JPG" alt="Limousin" loading="lazy"><div class="breed-caption">Foto: Wikimedia Commons</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -476,4 +505,4 @@
 </script>
 
 </body>
-</html>
+</html> 
